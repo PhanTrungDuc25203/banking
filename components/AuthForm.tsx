@@ -105,112 +105,112 @@ const AuthForm = ({ type }: { type: string }) => {
                     </h1>
                 </div>
             </header>
-            {/* {user ? ( */}
-            <div className="flex flex-col gap-4">
-                <PlaidLink user={user} variant="primary" />
-            </div>
-            {/* ) :
-                ( */}
-            <React.Fragment>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        {type === "sign-up" && (
-                            <React.Fragment>
-                                <div className="flex gap-4">
-                                    <CustomInput
-                                        control={form.control}
-                                        name='firstName'
-                                        label="First name"
-                                        placeholder="Phan"
-                                    />
-                                    <CustomInput
-                                        control={form.control}
-                                        name='lastName'
-                                        label="Last name"
-                                        placeholder="Piscean"
-                                    />
-                                </div>
-                                <CustomInput
-                                    control={form.control}
-                                    name='address1'
-                                    label="Address"
-                                    placeholder="Hoang Cuong Thanh Ba tinh Phu Tho"
-                                />
-                                <CustomInput
-                                    control={form.control}
-                                    name='city'
-                                    label="City"
-                                    placeholder="Thanh pho Ha Noi"
-                                />
-                                <div className="flex gap-4">
-                                    <CustomInput
-                                        control={form.control}
-                                        name='state'
-                                        label="Province"
-                                        placeholder="Phu Tho"
-                                    />
-                                    <CustomInput
-                                        control={form.control}
-                                        name='postalCode'
-                                        label="Postal code"
-                                        placeholder="Example: 12345"
-                                    />
-                                </div>
-                                <div className="flex gap-5">
-                                    <CustomInput
-                                        control={form.control}
-                                        name='dateOfBirth'
-                                        label="Date of Birth"
-                                        placeholder="yyyy-mm-dd"
-                                    />
-                                    <CustomInput
-                                        control={form.control}
-                                        name='ssn'
-                                        label="SSN"
-                                        placeholder="Example: 1234"
-                                    />
-                                </div>
-                            </React.Fragment>
-                        )}
-                        <CustomInput
-                            control={form.control}
-                            name='email'
-                            label="Email"
-                            placeholder="Enter your username"
-                        />
-                        <CustomInput
-                            control={form.control}
-                            name='password'
-                            label="Password"
-                            placeholder="Enter your password"
-                        />
-                        <div className="flex flex-col gap-4">
-                            <Button type="submit" className="form-btn" disabled={isLoading}>
-                                {isLoading ? (
+            {user ? (
+                <div className="flex flex-col gap-4">
+                    <PlaidLink user={user} variant="primary" />
+                </div>
+            ) :
+                (
+                    <React.Fragment>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                                {type === "sign-up" && (
                                     <React.Fragment>
-                                        <Loader2
-                                            size={20}
-                                            className="animate-spin"
-                                        /> &nbsp;
-                                        Loading...
+                                        <div className="flex gap-4">
+                                            <CustomInput
+                                                control={form.control}
+                                                name='firstName'
+                                                label="First name"
+                                                placeholder="Phan"
+                                            />
+                                            <CustomInput
+                                                control={form.control}
+                                                name='lastName'
+                                                label="Last name"
+                                                placeholder="Piscean"
+                                            />
+                                        </div>
+                                        <CustomInput
+                                            control={form.control}
+                                            name='address1'
+                                            label="Address"
+                                            placeholder="Hoang Cuong Thanh Ba tinh Phu Tho"
+                                        />
+                                        <CustomInput
+                                            control={form.control}
+                                            name='city'
+                                            label="City"
+                                            placeholder="Thanh pho Ha Noi"
+                                        />
+                                        <div className="flex gap-4">
+                                            <CustomInput
+                                                control={form.control}
+                                                name='state'
+                                                label="Province"
+                                                placeholder="Phu Tho"
+                                            />
+                                            <CustomInput
+                                                control={form.control}
+                                                name='postalCode'
+                                                label="Postal code"
+                                                placeholder="Example: 12345"
+                                            />
+                                        </div>
+                                        <div className="flex gap-5">
+                                            <CustomInput
+                                                control={form.control}
+                                                name='dateOfBirth'
+                                                label="Date of Birth"
+                                                placeholder="yyyy-mm-dd"
+                                            />
+                                            <CustomInput
+                                                control={form.control}
+                                                name='ssn'
+                                                label="SSN"
+                                                placeholder="Example: 1234"
+                                            />
+                                        </div>
                                     </React.Fragment>
-                                ) :
-                                    type === "sign-in" ? "Sign In" : "Sign Up"
-                                }
-                            </Button>
-                        </div>
-                    </form>
-                </Form>
-                <footer className="flex justify-center gap-1">
-                    <p className="text-14 font-normal text-gray-600">
-                        {type === "sign-in" ? "Don't have an account?" : "Already have an account"}
-                    </p>
-                    <Link href={type === "sign-in" ? "/sign-up" : "/sign-in"} className="form-link">
-                        {type === "sign-in" ? "Sign up" : "Sign in"}
-                    </Link>
-                </footer>
-            </React.Fragment>
-            {/* )} */}
+                                )}
+                                <CustomInput
+                                    control={form.control}
+                                    name='email'
+                                    label="Email"
+                                    placeholder="Enter your username"
+                                />
+                                <CustomInput
+                                    control={form.control}
+                                    name='password'
+                                    label="Password"
+                                    placeholder="Enter your password"
+                                />
+                                <div className="flex flex-col gap-4">
+                                    <Button type="submit" className="form-btn" disabled={isLoading}>
+                                        {isLoading ? (
+                                            <React.Fragment>
+                                                <Loader2
+                                                    size={20}
+                                                    className="animate-spin"
+                                                /> &nbsp;
+                                                Loading...
+                                            </React.Fragment>
+                                        ) :
+                                            type === "sign-in" ? "Sign In" : "Sign Up"
+                                        }
+                                    </Button>
+                                </div>
+                            </form>
+                        </Form>
+                        <footer className="flex justify-center gap-1">
+                            <p className="text-14 font-normal text-gray-600">
+                                {type === "sign-in" ? "Don't have an account?" : "Already have an account"}
+                            </p>
+                            <Link href={type === "sign-in" ? "/sign-up" : "/sign-in"} className="form-link">
+                                {type === "sign-in" ? "Sign up" : "Sign in"}
+                            </Link>
+                        </footer>
+                    </React.Fragment>
+                )}
         </section>
     )
 }

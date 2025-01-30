@@ -27,12 +27,12 @@ export const signIn = async ({ email, password }: signInProps) => {
     }
 }
 
-export const signUp = async (userData: SignUpParams) => {
-    const { email, password, firstName, lastName } = userData;
+export const signUp = async ({ password, ...userData }: SignUpParams) => {
+    const { email, firstName, lastName } = userData;
+
     let newUserAccount;
 
     try {
-        //create a user account
         const { account, database } = await createAdminClient();
 
         newUserAccount = await account.create(
@@ -42,16 +42,17 @@ export const signUp = async (userData: SignUpParams) => {
             `${firstName} ${lastName}`
         );
 
-        if (!newUserAccount) throw new Error("Errors occurred while creating a new User's account!");
+        if (!newUserAccount) throw new Error('Error creating user')
 
         const dwollaCustomerUrl = await createDwollaCustomer({
             ...userData,
-            type: 'personal',
+            type: 'personal'
         })
 
-        if (!dwollaCustomerUrl) throw new Error("Error occurred while creating a new Dwolla Customer!");
+        if (!dwollaCustomerUrl) throw new Error('Error creating Dwolla customer')
 
         const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+
         const newUser = await database.createDocument(
             DATABASE_ID!,
             USER_COLLECTION_ID!,
@@ -75,7 +76,7 @@ export const signUp = async (userData: SignUpParams) => {
 
         return parseStringify(newUser);
     } catch (error) {
-        console.log("Error: ", error);
+        console.error('Error', error);
     }
 }
 
@@ -104,18 +105,19 @@ export const createLinkToken = async (user: User) => {
     try {
         const tokenParams = {
             user: {
-                client_user_id: user.$id,
+                client_user_id: user.$id
             },
-            client_name: user.name,
+            client_name: `${user.firstName} ${user.lastName}`,
             products: ['auth'] as Products[],
-            language: 'vn',
-            country_codes: ['VN'] as CountryCode[],
+            language: 'en',
+            country_codes: ['US'] as CountryCode[],
         }
 
         const response = await plaidClient.linkTokenCreate(tokenParams);
+
         return parseStringify({ linkToken: response.data.link_token })
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
