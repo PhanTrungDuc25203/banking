@@ -40,12 +40,11 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {transactions.map((t: Transaction) => {
+                {transactions?.length ? transactions.map((t: Transaction) => {
                     const status = getTransactionStatus(new Date(t.date))
                     const amount = formatAmount(t.amount)
-
-                    const isDebit = t.type === 'debit';
-                    const isCredit = t.type === 'credit';
+                    const isDebit = t.type === 'debit'
+                    const isCredit = t.type === 'credit'
 
                     return (
                         <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#FFFBFA]' : 'bg-[#F6FEF9]'} !over:bg-none !border-b-DEFAULT`}>
@@ -57,10 +56,7 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                                 </div>
                             </TableCell>
 
-                            <TableCell className={`pl-2 pr-10 font-semibold ${isDebit || amount[0] === '-' ?
-                                'text-[#f04438]'
-                                : 'text-[#039855]'
-                                }`}>
+                            <TableCell className={`pl-2 pr-10 font-semibold ${isDebit || amount[0] === '-' ? 'text-[#f04438]' : 'text-[#039855]'}`}>
                                 {isDebit ? `-${amount}` : isCredit ? amount : amount}
                             </TableCell>
 
@@ -81,7 +77,7 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                             </TableCell>
                         </TableRow>
                     )
-                })}
+                }) : <TableRow><TableCell colSpan={6} className="text-center">No transactions found</TableCell></TableRow>}
             </TableBody>
         </Table>
     )
